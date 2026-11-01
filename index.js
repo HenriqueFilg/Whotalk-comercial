@@ -127,8 +127,8 @@
   document.querySelectorAll('.story-video video').forEach(v=>{
     v.muted=true; v.loop=true; v.controls=false;
     v.addEventListener('contextmenu',e=>e.preventDefault());
-    v.addEventListener('pause',()=>{ if(!document.hidden && v.getAttribute('src')) v.play().catch(()=>{}); });
-    const tryPlay=()=>{ if(v.getAttribute('src')) v.play().catch(()=>{}); };
+    v.addEventListener('pause',()=>{ if(!document.hidden && (v.getAttribute('src')||v.querySelector('source'))) v.play().catch(()=>{}); });
+    const tryPlay=()=>{ if(v.getAttribute('src')||v.querySelector('source')) v.play().catch(()=>{}); };
     v.addEventListener('canplay',tryPlay); tryPlay();
   });
   document.addEventListener('click',e=>{
